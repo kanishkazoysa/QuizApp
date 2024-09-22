@@ -6,8 +6,7 @@ import {
   UserOutlined, 
   EnvironmentOutlined, 
   FormOutlined, 
-  MailOutlined ,
-  
+  MailOutlined 
 } from '@ant-design/icons';
 import logo from "../../../assets/logo.jpg";
 import './MainDashboard.css';
@@ -36,30 +35,26 @@ function SideMenu() {
         setSelectedKeys(pathName);
     }, [location.pathname]);
 
-    // const handleLogoClick = () => {
-    //     navigate("/home");
-    // };
-
     return (
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: '#1890ff',
+                    colorPrimary: '#001f3f', // Dark blue color
                     borderRadius: 6,
                 },
                 components: {
                     Menu: {
                         itemHeight: 50,
-                        itemHoverColor: '#1890ff',
-                        itemSelectedColor: '#1890ff',
-                        itemSelectedBg: '#e6f7ff',
+                        itemHoverColor: '#001f3f', // Dark blue color
+                        itemSelectedColor: '#ffffff', // White color for selected text
+                        itemSelectedBg: '#001f3f', // Dark blue color for selected background
                     },
                 },
             }}
         >
-            <div className="Admin_SideMenu" style={{ padding: '20px', }}>
-                <div style={{ display: 'flex', alignItems: 'center',justifyContent:"center", marginBottom: '30px', cursor: 'pointer' }}>
-                    <img src={logo} alt="logo" style={{ width: '100px',height:'100px'}} />
+            <div className="Admin_SideMenu" style={{ padding: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: "center", marginBottom: '30px', cursor: 'pointer' }}>
+                    <img src={logo} alt="logo" style={{ width: '100px', height: '100px' }} />
                 </div>
                 <Menu
                     mode="inline"
