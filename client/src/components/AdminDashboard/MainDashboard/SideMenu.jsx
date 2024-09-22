@@ -21,7 +21,7 @@ function getItem(label, key, icon, children, type) {
 const items = [
     getItem("Dashboard", "/admin", <DashboardOutlined />),
     getItem("Users", "/admin/users", <UserOutlined />),
-    getItem("Create Quiz", "/admin/quiz", <EnvironmentOutlined />),
+    getItem("Create Quiz", "/admin/quiz", <FormOutlined />),
     getItem("test1", "/admin/test1", <FormOutlined />),
     getItem("test2", "/admin/test2", <MailOutlined />),
 ];

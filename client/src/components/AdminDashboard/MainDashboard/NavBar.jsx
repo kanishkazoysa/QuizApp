@@ -1,6 +1,5 @@
 import React from "react"
 import "./MainDashboard.css";
-import logo from "../../../assets/logo.jpg";
 
 const NavBar = () => {
 
