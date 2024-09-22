@@ -2,6 +2,7 @@ import React from "react";
 import SideMenu from "../MainDashboard/SideMenu";
 import AdminRoutes from "./AdminRoutes";
 import "./MainDashboard.css";
+import NavBar from "./NavBar";
 
 const MainDashboard = () => {
   return (
@@ -12,6 +13,7 @@ const MainDashboard = () => {
             <SideMenu />
           </div>
           <div className="Admin_PageContent">
+            <NavBar />
             <AdminRoutes />
           </div>
         </div>
