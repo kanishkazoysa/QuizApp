@@ -6,6 +6,7 @@ import OtpPage from "./components/Pages/OtpPage/OtpPage";
 import ChangePassword from "./components/Pages/ChangePassword/ChangePassword";
 // import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Admin from "./components/AdminDashboard/MainDashboard/MainDashboard";
+import Register from "./components/Pages/Register/Register";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/otp" element={<OtpPage />} />
           <Route path="/change-password" element={<ChangePassword />} />
