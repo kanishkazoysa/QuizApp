@@ -5,6 +5,7 @@ import ForgetPassword from "./components/Pages/ForgetPassword/ForgetPassword";
 import OtpPage from "./components/Pages/OtpPage/OtpPage";
 import ChangePassword from "./components/Pages/ChangePassword/ChangePassword";
 // import ProtectedRoutes from "./utils/ProtectedRoutes";
+import Admin from "./components/AdminDashboard/MainDashboard/MainDashboard";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/otp" element={<OtpPage />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/admin/*" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </>
