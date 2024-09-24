@@ -5,13 +5,20 @@ import Login from "./components/pages/Login/Login";
 function App() {
 
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+
+
+    <div className="bg-purple-100">
+    <Login/>
+    </div>
+
+    
+    // <>
+    //   <BrowserRouter>
+    //     <Routes>
+    //       <Route path="/" element={<Login />} />
+    //     </Routes>
+    //   </BrowserRouter>
+    // </>
   );
 }
 
