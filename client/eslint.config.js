@@ -24,6 +24,8 @@ export default [
       'react-refresh': reactRefresh,
     },
     rules: {
+      "react/prop-types": "off",
+      "react/no-unespcaped-entities": "off",
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
