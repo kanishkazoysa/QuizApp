@@ -12,7 +12,6 @@ import Admin from "./components/AdminDashboard/MainDashboard/MainDashboard";
 import LoadingSpinner from "./components/Pages/LoadingSpinner";
 import ResetPasswordPage from "./components/Pages/ResetPasswordPage";
 
-
 // Protect Routes that require authentication
 // eslint-disable-next-line react/prop-types
 const ProtectedRoutes = ({ children }) => {
@@ -86,14 +85,15 @@ function App() {
             </RedirectAuthenticatedUser>
           }
         />
-        <Route 
+        <Route
           path="/reset-password/:token"
           element={
             <RedirectAuthenticatedUser>
               <ResetPasswordPage />
             </RedirectAuthenticatedUser>
           }
-         />
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       <Toaster />
