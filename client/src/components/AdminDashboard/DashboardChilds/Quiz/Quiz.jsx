@@ -1,7 +1,12 @@
 
+
 const Quiz = () => {
   return (
-    <div>Quiz</div>
+      <div className="h-screen w-screen">
+        <h1>
+          fgfgf
+        </h1>
+      </div>
   )
 }
 
