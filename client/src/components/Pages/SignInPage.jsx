@@ -4,17 +4,16 @@ import { Mail, Lock, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
 import Input from "./Input.jsx";
 import BackGround from "./BackGround.jsx";
+import { useAuthStore } from "../../store/authStore.js";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const {login, isLoading, error} = useAuthStore();
 
-  const isLoading = false;
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log;
+    await login(email, password);
   };
 
   return (
@@ -44,12 +43,15 @@ const SignInPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {error && (
+              <p className="text-red-500 text-semibold mb-2  ">{error}</p>
+            )}
             <div className="flex items-center mb-6">
               <Link
-                to="/forget-password"
+                to="/forgot-password"
                 className="text-sm text-green-400 hover:underline"
               >
-                Forget Password?
+                Forgot Password?
               </Link>
             </div>
             <motion.button
