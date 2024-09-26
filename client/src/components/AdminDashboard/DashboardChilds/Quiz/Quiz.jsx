@@ -8,7 +8,7 @@ const Quiz = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await axios.post('/api/quizzes', values);
+      const response = await axios.post('/api/createQuiz', values);
       message.success('Quiz created successfully!');
       form.resetFields();
     } catch (error) {
