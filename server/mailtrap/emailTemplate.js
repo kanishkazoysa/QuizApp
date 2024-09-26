@@ -211,7 +211,7 @@ export const WELCOME_EMAIL_TEMPLATE = `
                       </tr>
                       <tr>
                         <td style="padding: 0 0 24px 0; text-align:center; ">
-                          <a class="button" href="{{next_step_link}}" title="Reset Password" style="background: #4C83EE; text-decoration: none; display: inline-block; padding: 10px 0; color: #fff; font-size: 14px; line-height: 21px; text-align: center; font-weight: bold; border-radius: 7px; width: 40%;margin-top: 20px; margin-bottom:20px">Login</a>
+                          <a class="button" href="http://localhost:5173/" title="Reset Password" style="background: #4C83EE; text-decoration: none; display: inline-block; padding: 10px 0; color: #fff; font-size: 14px; line-height: 21px; text-align: center; font-weight: bold; border-radius: 7px; width: 40%;margin-top: 20px; margin-bottom:20px">Login</a>
                         </td>
                       </tr>
                       <tr>
@@ -226,7 +226,7 @@ export const WELCOME_EMAIL_TEMPLATE = `
               <tr>
                 <td style="padding: 24px 0 48px; font-size: 0px;">
                   <div class="outlook-group-fix" style="padding: 0 0 20px 0; vertical-align: top; display: inline-block; text-align: center; width:100%;">
-                    <span style="padding: 0; font-size: 11px; line-height: 15px; font-weight: normal; color: #8B949F;">Company Legal Name<br/>Company Physical Address</span>
+                    <span style="padding: 0; font-size: 11px; line-height: 15px; font-weight: normal; color: #8B949F;">Korean Academy<br/>N0:12, Galle Road, Panadura</span>
                   </div>
                   <!--[if mso | IE]>      </td></tr></table>      <![endif]-->
                 </td>
