@@ -52,9 +52,7 @@ const SignUpPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {error && (
-              <p className="text-red-500 mt-2 font-semibold">{error}</p>
-            )}
+
             <Input
               icon={Lock}
               type="password"
@@ -62,6 +60,9 @@ const SignUpPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {error && (
+              <p className="text-red-500 mb-1  font-semibold">{error}</p>
+            )}
 
             <PasswordStrengthMeter password={password} />
 

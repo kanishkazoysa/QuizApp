@@ -2,12 +2,17 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import BackGround from "./BackGround";
+import { useAuthStore } from "../../store/authStore";
+import { toast } from "react-hot-toast";
+
+
 
 const EmailVerificationPage = () => {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
   const navigate = useNavigate();
-  const isLoading = false;
+  const {error,isLoading,verifyEmail} = useAuthStore();
+
 
   const handleChange = (index, value) => {
     const newCode = [...code];
@@ -41,10 +46,16 @@ const EmailVerificationPage = () => {
   };
 
   // Submit the form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const vertificationCode = code.join("");
-    console.log(vertificationCode);
+    try {
+      await verifyEmail(vertificationCode);
+      navigate("/admin");
+      toast.success("Email verified successfully");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Auto submit when all fields are filled
@@ -84,6 +95,7 @@ const EmailVerificationPage = () => {
                 />
               ))}
             </div>
+            {error && <p className="text-red-500 font-semibold mb-1">{error}</p>}
             <motion.button
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.98 }}
