@@ -8,13 +8,14 @@ const Quiz = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await axios.post('/api/createQuiz', values);
+      const response = await axios.post('http://localhost:5000/api/quiz', values); // Update API endpoint
       message.success('Quiz created successfully!');
       form.resetFields();
     } catch (error) {
       message.error('Failed to create quiz');
     }
   };
+  
 
   return (
     <div className="quiz-container">
