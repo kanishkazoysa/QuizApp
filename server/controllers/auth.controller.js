@@ -1,6 +1,5 @@
 import bcryptjs from "bcryptjs";
 import crypto from "crypto";
-
 import { User } from "../models/user.model.js";
 import { generateVerificationCode } from "../utils/generateVerificationToken.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
@@ -10,6 +9,7 @@ import {
   sendPasswordResetEmail,
   sendPasswordResetSuccessEmail,
 } from "../mailtrap/emails.js";
+
 
 export const register = async (req, res) => {
   const { email, password, name } = req.body;
@@ -67,7 +67,7 @@ export const verifyEmail = async (req, res) => {
       verificationToken: code,
       verificationTokenExpiresAt: { $gt: Date.now() },
     });
-
+    
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -79,7 +79,7 @@ export const verifyEmail = async (req, res) => {
     user.verificationToken = undefined;
     user.verificationTokenExpiresAt = undefined;
     await user.save();
-
+    
     try {
       const response = await sendWelcomeEmail(user.email, user.name);
 

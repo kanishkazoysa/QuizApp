@@ -8,14 +8,30 @@ const Quiz = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/quiz', values); // Update API endpoint
+      console.log('Submitting quiz data:', JSON.stringify(values, null, 2));
+      const response = await axios.post('http://localhost:5000/api/quiz', values, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      console.log('Server response:', response.data);
       message.success('Quiz created successfully!');
       form.resetFields();
     } catch (error) {
-      message.error('Failed to create quiz');
+      console.error('Error creating quiz:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+        console.error('Response headers:', error.response.headers);
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+      } else {
+        console.error('Error setting up request:', error.message);
+      }
+      message.error('Failed to create quiz: ' + (error.response ? error.response.data.message : error.message));
     }
   };
-  
 
   return (
     <div className="quiz-container">
