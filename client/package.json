@@ -16,6 +16,7 @@
     "lucide-react": "^0.445.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-highlight-words": "^0.20.0",
     "react-hot-toast": "^2.4.1",
     "react-password-strength-bar": "^0.4.1",
     "react-router-dom": "^6.26.2",

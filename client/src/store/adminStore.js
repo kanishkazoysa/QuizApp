@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import axios from "axios";
+import { message } from "antd";
 
 const ADMIN_API_URL = "http://localhost:5000/api/admin";
-const AUTH_API_URL = "http://localhost:5000/api/auth";
+// const AUTH_API_URL = "http://localhost:5000/api/auth";
 
 axios.defaults.withCredentials = true;
 
@@ -36,23 +37,24 @@ export const useAdminStore = create((set) => ({
       throw error;
     }
   },
+
   getStudentData: async () => {
     set({ isLoading: true, error: null });
-
     try {
-      const response = await axios.get(`${ADMIN_API_URL}/get-student-data`);
+      const response = await axios.get(`${ADMIN_API_URL}/student-data`);
       set({
-        StudentData: response.data.StudentData,
+        studentData: response.data.data,
         isLoading: false,
       });
     } catch (error) {
       set({
-        error: error.response.data.message || "Error getting student data",
+        error: error.response?.data?.message || "Error getting student data",
         isLoading: false,
       });
       throw error;
     }
   },
+
   getStudentDataById: async (id) => {
     set({ isLoading: true, error: null });
 
@@ -110,5 +112,5 @@ export const useAdminStore = create((set) => ({
       });
       throw error;
     }
-  }
+  },
 }));

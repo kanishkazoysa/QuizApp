@@ -7,7 +7,7 @@ import NavBar from "./NavBar";
 const MainDashboard = () => {
   return (
     <>
-      <div className="Admin_DashboardContainer">
+      <div className="Admin_DashboardContainer overflow-hidden">
         <div className="Admin_SideMenuAndPageContent">
           <div className="admin_sidebar_container">
             <SideMenu />
