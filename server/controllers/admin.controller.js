@@ -3,10 +3,10 @@ import { Student } from "../models/student.model.js";
 // Neeed to check the admin role by admin token and then update the student data
 
 export const addStudentData = async (req, res) => {
-  const { name, email, phone, address, dob, nic } = req.body;
+  const { name, email, age, phone, address, dob, nic } = req.body;
 
   try {
-    if (!name || !email || !phone || !address || !dob || !nic) {
+    if (!name || !email || !age || !phone || !address || !dob || !nic) {
       throw new Error("All fields are required");
     }
 
@@ -22,6 +22,7 @@ export const addStudentData = async (req, res) => {
     const student = new Student({
       name,
       email,
+      age,
       phone,
       address,
       dob,
@@ -69,7 +70,6 @@ export const getStudentDataById = async (req, res) => {
 };
 
 export const updateStudentData = async (req, res) => {
-  
   try {
     const studentId = req.params.id;
     const isStudentExist = await Student.findById(studentId);

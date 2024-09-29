@@ -69,7 +69,7 @@ function App() {
           }
         />
         <Route
-          path="/admin"
+          path="/admin/*"
           element={
             <ProtectedRoutes>
               <Admin />
@@ -93,7 +93,7 @@ function App() {
             </RedirectAuthenticatedUser>
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        
       </Routes>
 
       <Toaster />
