@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import axios from "axios";
-import { message } from "antd";
 
 const ADMIN_API_URL = "http://localhost:5000/api/admin";
 // const AUTH_API_URL = "http://localhost:5000/api/auth";
@@ -59,36 +58,37 @@ export const useAdminStore = create((set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const response = await axios.get(
-        `${ADMIN_API_URL}/get-student-data/${id}`
-      );
+      const response = await axios.get(`${ADMIN_API_URL}/student-data/${id}`);
+      console.log("API response:", response.data.data); // Log the API response
       set({
-        StudentData: response.data.StudentData,
+        studentData: response.data.data,
         isLoading: false,
       });
     } catch (error) {
+      console.error("Error response:", error.response);
       set({
-        error: error.response.data.message || "Error getting student data",
+        error: error.response?.data?.message || "Error getting student data",
         isLoading: false,
       });
       throw error;
     }
   },
-  updateStudentData: async (id, name, email, phone, address, dob, nic) => {
+updateStudentData: async (id, email, name, age, phone, address, dob, nic) => {
     set({ isLoading: true, error: null });
 
     try {
       const response = await axios.put(
         `${ADMIN_API_URL}/update-student-data/${id}`,
-        { name, email, phone, address, dob, nic }
+        { email, name, age, phone, address, dob, nic }
       );
       set({
-        StudentData: response.data.StudentData,
+        studentData: response.data.studentData,
         isLoading: false,
       });
     } catch (error) {
+      console.error("Error response:", error.response);
       set({
-        error: error.response.data.message || "Error updating student data",
+        error: error.response?.data?.message || "Error updating student data",
         isLoading: false,
       });
       throw error;

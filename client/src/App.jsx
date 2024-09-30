@@ -11,6 +11,8 @@ import EmailVerificationPage from "./components/Pages/EmailVerificationPage";
 import Admin from "./components/AdminDashboard/MainDashboard/MainDashboard";
 import LoadingSpinner from "./components/Pages/LoadingSpinner";
 import ResetPasswordPage from "./components/Pages/ResetPasswordPage";
+import UserData from "./components/AdminDashboard/DashboardChilds/UserManagement/UserData";
+
 
 // Protect Routes that require authentication
 // eslint-disable-next-line react/prop-types
@@ -76,6 +78,16 @@ function App() {
             </ProtectedRoutes>
           }
         />
+
+        <Route
+          path="admin/users/adduser/:id"
+          element={
+            <ProtectedRoutes>
+              <UserData />
+            </ProtectedRoutes>
+          }
+        />
+
         <Route path="/verify-email" element={<EmailVerificationPage />} />
         <Route
           path="/forgot-password"
@@ -93,7 +105,6 @@ function App() {
             </RedirectAuthenticatedUser>
           }
         />
-        
       </Routes>
 
       <Toaster />

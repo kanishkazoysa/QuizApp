@@ -3,11 +3,12 @@ import {
   SearchOutlined,
   EditOutlined,
   DeleteOutlined,
-  UserAddOutlined,
 } from "@ant-design/icons";
-import { Button, Input, Space, Table } from "antd";
+import { Button, Input, Space, Table, Modal } from "antd";
 import Highlighter from "react-highlight-words";
 import { useAdminStore } from "../../../../store/adminStore.js";
+import { useNavigate } from "react-router-dom";
+import {toast} from 'react-hot-toast';
 
 const data = [
   {
@@ -25,22 +26,79 @@ const UserManagement = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [filteredData, setFilteredData] = useState(data);
-  const { getStudentData, studentData, isLoading, error } = useAdminStore();
+  const navigate = useNavigate();
+  const { getStudentData, studentData,deleteStudentData, isLoading, error } = useAdminStore();
   const searchInput = useRef(null);
 
-  // GET student data
-  useEffect(() => {
-    const fetchStudentData = async () => {
+// GET student data
+useEffect(() => {
+  const fetchStudentData = async () => {
+    try {
+      await getStudentData();
+    } catch (error) {
+      console.error("Error fetching student data:", error);
+    }
+  };
+
+  console.log("Fetching student data");
+  fetchStudentData();
+
+  const intervalId = setInterval(() => {
+    console.log("Fetching student data at interval");
+    fetchStudentData();
+  }, 60000); 
+
+  // Cleanup interval on component unmount
+  return () => clearInterval(intervalId);
+}, [getStudentData]);
+
+  // Edit user
+  const handleEditUser = (userId) => {
+    if (userId) {
+      navigate(`/admin/users/adduser/${userId}`);
+    } else {
+      console.error("User ID is undefined");
+    }
+  };
+
+  // Delete user
+const handleDeleteUser = (userId, name) => {
+  if (userId) {
+    const confirmDelete = async () => {
       try {
-        await getStudentData();
-      } catch (error) {
-        console.error("Error fetching student data:", error);
+        await deleteStudentData(userId);
+        toast.success("Student deleted successfully");
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+        
+      } catch (error) { 
+        toast.error("Error deleting student");
+        console.error("Error deleting student:", error);
       }
     };
-    console.log("Fetching student data");
-    fetchStudentData();
-  }, [getStudentData]);
 
+    Modal.confirm({
+      title: "Are you sure you want to delete this student?",
+      content: `Name: ${name}`,
+      okText: "Yes",
+      okType: "danger",
+      icon: <DeleteOutlined />,
+      cancelText: "No",
+      style: {
+        position: "relative",
+        top: "40%",
+      },
+      onOk: confirmDelete,
+      onCancel() {
+        console.log("Delete action cancelled");
+      },
+    });
+  } else {
+    console.error("User ID is undefined");
+  }
+};
+  
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -165,106 +223,86 @@ const UserManagement = () => {
       ),
   });
 
-  const handleAddUser = (e) => {
-    e.preventDefault();
-    console.log("Add User");
-  };
+  console.log("Student Data:", studentData);
 
-  const handleEditUser = () => {
-    console.log("Edit User");
-  };
 
-  const handleDeleteUser = () => {
-    console.log("Delete User");
-  };
 
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    width: "10%",
-    ...getColumnSearchProps("name"),
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-    width: "5%",
-    ...getColumnSearchProps("age"),
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-    width: "15%",
-    ...getColumnSearchProps("address"),
-  },
-  {
-    title: "Phone",
-    dataIndex: "phone",
-    key: "phone",
-    width: "10%",
-    ...getColumnSearchProps("phone"),
-  },
-  {
-    title: "DOB",
-    dataIndex: "dob",
-    key: "dob",
-    width: "10%",
-    ...getColumnSearchProps("dob."),
-  },
-  {
-    title: "NIC",
-    dataIndex: "nic",
-    key: "nic",
-    width: "10%",
-    ...getColumnSearchProps("nic"),
-  },
-  {
-    title: "Action",
-    key: "action",
-    width: "10%",
-    render: () => (
-      <Space size="middle">
-        <Button
-          type="primary"
-          className="bg-blue-400 hover:bg-blue-600"
-          icon={<EditOutlined />}
-          onClick={handleEditUser}
-        />
-        <Button
-          type="primary"
-          danger
-          className="bg-red-400 hover:bg-red-600 text-white"
-          icon={<DeleteOutlined />}
-          onClick={handleDeleteUser}
-        />
-      </Space>
-    ),
-  },
-];
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      width: "10%",
+      ...getColumnSearchProps("name"),
+    },
+    {
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
+      width: "5%",
+      ...getColumnSearchProps("age"),
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+      width: "15%",
+      ...getColumnSearchProps("address"),
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+      width: "10%",
+      ...getColumnSearchProps("phone"),
+    },
+    {
+      title: "DOB",
+      dataIndex: "dob",
+      key: "dob",
+      width: "10%",
+      ...getColumnSearchProps("dob."),
+    },
+    {
+      title: "NIC",
+      dataIndex: "nic",
+      key: "nic",
+      width: "10%",
+      ...getColumnSearchProps("nic"),
+    },
+    {
+      title: "Action",
+      key: "action",
+      width: "10%",
+      render: (record) => (
+        <Space size="middle">
+          <Button
+            type="primary"
+            className="bg-blue-400 hover:bg-blue-600"
+            icon={<EditOutlined />}
+            onClick={() => handleEditUser(record._id)}
+          />
+          <Button
+            type="primary"
+            danger
+            className="bg-red-400 hover:bg-red-600 text-white"
+            icon={<DeleteOutlined />}
+            onClick={() => handleDeleteUser(record._id,record.name)}
+          />
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <div className="w-full h-full flex flex-col p-10">
-      <div className="w-full flex justify-between">
-        <div></div>
-
-        <Button
-          type="primary"
-          icon={<UserAddOutlined />}
-          onClick={handleAddUser}
-        >
-          Add User
-        </Button>
-      </div>
-
       <Table
         className="mt-4"
         columns={columns}
         dataSource={studentData}
         loading={isLoading}
         pagination={{ pageSize: 5 }}
+        rowKey="_id"
       />
       {error && <div className="error">Error: {error}</div>}
     </div>
