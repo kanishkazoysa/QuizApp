@@ -1,12 +1,10 @@
- import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, ConfigProvider, Typography } from "antd";
 import { 
-  DashboardOutlined, 
-  UserOutlined, 
-  EnvironmentOutlined, 
+  HomeOutlined,
   FormOutlined, 
-  MailOutlined 
+  WhatsAppOutlined
 } from '@ant-design/icons';
 import logo from "../../../assets/logo.jpg";
 import './MainDashboard.css';
@@ -18,17 +16,15 @@ function getItem(label, key, icon, children, type) {
 }
 
 const items = [
-    getItem("Dashboard", "/admin", <DashboardOutlined />),
-    getItem("Users", "/admin/users", <UserOutlined />),
-    getItem("Create Quiz", "/admin/quiz", <FormOutlined />),
-    getItem("test1", "/admin/test1", <FormOutlined />),
-    getItem("test2", "/admin/test2", <MailOutlined />),
+    getItem("Home", "/user", <HomeOutlined />),
+    getItem("Quiz", "/user/quiz", <FormOutlined />),
+    getItem("Contact", "/user/contact", <WhatsAppOutlined/>),
 ];
 
 function SideMenu() {
     const location = useLocation();
     const navigate = useNavigate();
-    const [selectedKeys, setSelectedKeys] = useState("/admin");
+    const [selectedKeys, setSelectedKeys] = useState("/user");
 
     useEffect(() => {
         const pathName = location.pathname;

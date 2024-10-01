@@ -6,6 +6,7 @@ import OtpPage from "./components/Pages/OtpPage/OtpPage";
 import ChangePassword from "./components/Pages/ChangePassword/ChangePassword";
 // import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Admin from "./components/AdminDashboard/MainDashboard/MainDashboard";
+import NavBar from "./components/MainPageUser/MainPage/NavBar";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/otp" element={<OtpPage />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/admin/*" element={<Admin />} />
+          <Route path="/navbar" element={<NavBar />} />
         </Routes>
       </BrowserRouter>
     </>
