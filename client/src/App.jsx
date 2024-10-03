@@ -18,7 +18,8 @@ function App() {
           <Route path="/otp" element={<OtpPage />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/admin/*" element={<Admin />} />
-          <Route path="/navbar" element={<NavBar />} />
+          {/* <Route path="/navbar" element={<NavBar />} /> */}
+          <Route path="/user/*" element={<User/>} />
         </Routes>
       </BrowserRouter>
     </>
