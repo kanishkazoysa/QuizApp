@@ -1,0 +1,71 @@
+/* AdminDashboard & sidebar */
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.Admin_DashboardContainer {
+    width: 100vw;
+    height: 100vh;
+    
+    overflow-x: hidden;
+}
+.Admin_SideMenuAndPageContent {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #f4f3f3;
+}
+.Admin_SideMenu {
+    background-color: #ffffff;
+    height: 100vh;
+    width: 250px;
+    box-shadow: 2px 0 8px 0 rgba(29,35,41,.05);
+    border-right: 1px solid #f0f0f0;
+    overflow-y: auto;
+}
+.Admin_PageContent {
+    flex: 1;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-left: 250px;
+}
+
+.admin_sidebar_container {
+    position: fixed;
+}
+
+/* Nav Bar */
+
+.admin-dashboard-header{
+    width: 99%;
+    height: 63.5px;
+    border-radius: 50px;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    justify-content:space-between;
+    border: 2px solid #dbdbdb; /* Add this line */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+}
+.avatar-container {
+    width: 40px;
+    height: 40px;
+    right: 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.header-text {
+    display: flex;
+    margin-left: 20px;
+    align-items: center; /* Vertically center */
+}
+
+
+

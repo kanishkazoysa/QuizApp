@@ -1,0 +1,55 @@
+To do this,
+==> .env 
+==> package-lock.json
+==> package.json should be out of the client and server folders that consider as root
+
+// In package.json
+  "scripts": {
+    "dev": "Node_ENV=development nodemon server/index.js",
+    "start":"Node_ENV=production nodemon server/index.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+
+  // In server/index.js
+
+  import path from "path";
+
+  // under PORT
+  const __dirname = path.resolve(); 
+
+  //under authRoutes
+  if (process.env.Node_ENV === "production") {
+    app.use(express.static(path.join(__dirname,"/client/dist")));
+    app.get("*",(req,res) => {
+      res.sendFile(path.resolve(__dirname, "client","dist", "index.html"))
+    });
+  }
+
+
+  // After done above configurations from the root, now root has
+  ==> client
+  ==> server
+  ==> package.lock.json
+  ==> package.json
+  ==> .env
+
+  npm run build
+
+  ==> First, install all the packages for server 
+  ==> Install all the packages for client
+  ==> Build the front end application
+  
+  After get the dist folder
+
+  we can give,
+
+  npm start
+
+  Now we can run the both front end and backend via same port 5000
+
+
+
+  // in authStore
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth";
